@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon --watch src --delay 1 --exec ts-node src/bin/www.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/mongodb": "^3.3.0",
+    "nodemon": "^1.19.1",
+    "reflect-metadata": "^0.1.13",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.19.0",
+    "tslint-config-airbnb": "^5.11.1",
+    "type-graphql": "^0.17.5",
+    "typescript": "^3.5.3"
+  },
+  "dependencies": {
+    "apollo-server": "^2.9.0",
+    "mongodb": "^3.3.1"
+  }
+}
