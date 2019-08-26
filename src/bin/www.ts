@@ -1,7 +1,6 @@
 import app from '../app';
+import { port } from '../config';
 
-const port = process.env.PORT || 3000;
-
-app.listen(port)
+app.listen(port || 3000)
   .then(() => console.log('start'))
   .catch(e => console.error(e));
