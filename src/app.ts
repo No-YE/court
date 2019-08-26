@@ -12,4 +12,5 @@ const schema: GraphQLSchema = buildSchemaSync({
 
 export default new ApolloServer({
   schema,
+  playground: true,
 });
