@@ -6,6 +6,6 @@ export interface UserRepository {
   updatePresentation(id: ObjectId, num: number): Promise<UpdateWriteOpResult>;
   updatePoint(id: ObjectId, point: number): Promise<UpdateWriteOpResult>;
   delete(id: ObjectId): Promise<DeleteWriteOpResultObject>;
-  isAdmin(id: ObjectId): Promise<boolean>;
-  findPoints(id: ObjectId, offset: number, limit: number): Promise<ObjectId[]>;
+  findByUserId(id: ObjectId): Promise<User>;
+  findUsers(): Promise<User[]>;
 }
