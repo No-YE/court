@@ -31,7 +31,7 @@ export default class MongoUserRepository implements UserRepository {
   async findByUserId(id: ObjectId): Promise<User> {
     return this.collection.findOne({ _id: id });
   }
-  async findUsers(): Promise<User[]> {
-    return this.collection.find().toArray();
+  async findUsers(offset: number, limit: number): Promise<User[]> {
+    return this.collection.find().skip(offset).limit(limit).toArray();
   }
 }

@@ -7,5 +7,5 @@ export interface UserRepository {
   updatePoint(id: ObjectId, point: number): Promise<UpdateWriteOpResult>;
   delete(id: ObjectId): Promise<DeleteWriteOpResultObject>;
   findByUserId(id: ObjectId): Promise<User>;
-  findUsers(): Promise<User[]>;
+  findUsers(offset: number, limit: number): Promise<User[]>;
 }
