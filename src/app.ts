@@ -2,13 +2,14 @@ import 'reflect-metadata';
 import { buildSchemaSync } from 'type-graphql';
 import { GraphQLSchema } from 'graphql';
 import { ApolloServer } from 'apollo-server';
-import { MockResolver } from './resolvers';
+import { MockResolver, UserResolver } from './resolvers';
 import { verifyToken, authChecker, Context } from './util';
 
 const schema: GraphQLSchema = buildSchemaSync({
   authChecker,
   resolvers: [
     MockResolver,
+    UserResolver,
   ],
 });
 

@@ -1,18 +1,19 @@
 import {
   Collection,
-  Db,
   InsertOneWriteOpResult,
   UpdateWriteOpResult,
   DeleteWriteOpResultObject,
 } from 'mongodb';
 import { UserRepository } from './UserRepository';
 import { User } from '../../entities';
+import { DB } from '../connection';
 
 export default class MongoUserRepository implements UserRepository {
-  private readonly collection: Collection;
+  private collection: Collection;
 
-  constructor(db: Db) {
-    this.collection = db.collection('users');
+  constructor() {
+    DB.getDb()
+      .then(db => this.collection = db.collection('users'));
   }
 
   async create(user: User): Promise<InsertOneWriteOpResult> {
