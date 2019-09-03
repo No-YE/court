@@ -1,12 +1,14 @@
 import { PointRepository } from './PointRepository';
 import { PointDetail } from '../../entities';
-import { InsertOneWriteOpResult, Collection, Db } from 'mongodb';
+import { InsertOneWriteOpResult, Collection } from 'mongodb';
+import { DB } from '../connection';
 
 export default class MongoPointRepository implements PointRepository {
-  private readonly collection: Collection;
+  private collection: Collection;
 
-  constructor(db: Db) {
-    this.collection = db.collection('points');
+  constructor() {
+    DB.getDb()
+      .then(db => this.collection = db.collection('points'));
   }
 
   async createPoint(point: PointDetail): Promise<InsertOneWriteOpResult> {

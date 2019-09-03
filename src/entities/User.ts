@@ -1,5 +1,6 @@
 import { ObjectType, Field } from 'type-graphql';
 import { ObjectId } from 'mongodb';
+import { ObjectIdScalar } from '../util';
 
 @ObjectType()
 export class User {
@@ -21,6 +22,6 @@ export class User {
   @Field()
   point: number;
 
-  @Field()
+  @Field(() => [ObjectIdScalar])
   pointId: ObjectId[];
 }

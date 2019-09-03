@@ -1,12 +1,21 @@
-import { connect, MongoClientOptions, Db } from 'mongodb';
+import { connect, Db, MongoClientOptions } from 'mongodb';
 import { mongoUri } from '../config';
 
-export const connectDb = async(): Promise<Db> => {
-  const options: MongoClientOptions = {
-    useNewUrlParser: true,
-  };
-
-  const connection = await connect(mongoUri, options);
-
-  return connection.db();
+const options: MongoClientOptions = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 };
+
+export class DB {
+  static db: Db;
+
+  private constructor() {}
+
+  static async getDb() {
+    if (!this.db) {
+      this.db = (await connect(mongoUri, options)).db();
+    }
+
+    return this.db;
+  }
+}
