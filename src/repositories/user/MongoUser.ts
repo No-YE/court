@@ -1,4 +1,5 @@
 import {
+  ObjectId,
   Collection,
   InsertOneWriteOpResult,
   UpdateWriteOpResult,
@@ -22,8 +23,16 @@ export default class MongoUserRepository implements UserRepository {
   async updatePresentation(id: string, num: number): Promise<UpdateWriteOpResult> {
     return this.collection.updateOne({ id }, { remainPresentation: num });
   }
-  async updatePoint(id: string, point: number): Promise<UpdateWriteOpResult> {
-    return this.collection.updateOne({ id }, { point });
+  async updatePoint(id: string, point: number, pointId: ObjectId): Promise<UpdateWriteOpResult> {
+    return this.collection.updateOne({ id }, {
+      point,
+      pointId: {
+        $push: {
+          $each: [pointId],
+          $position: 0,
+        },
+      },
+    });
   }
   async delete(id: string): Promise<DeleteWriteOpResultObject> {
     return this.collection.deleteOne({ id });
@@ -31,7 +40,16 @@ export default class MongoUserRepository implements UserRepository {
   async findByUserId(id: string): Promise<User> {
     return this.collection.findOne({ id });
   }
-  async findUsers(offset: number, limit: number): Promise<User[]> {
-    return this.collection.find().skip(offset).limit(limit).toArray();
+  async findUsers(
+    offset: number,
+    limit: number,
+    pointSkip: number = 0,
+    pointLimit: number = 10,
+  ): Promise<User[]> {
+    return this.collection.find().project({
+      pointId: {
+        $slice: [pointSkip, pointLimit],
+      },
+    }).skip(offset).limit(limit).toArray();
   }
 }

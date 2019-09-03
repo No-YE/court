@@ -8,7 +8,7 @@ export default class MongoPointRepository implements PointRepository {
 
   constructor() {
     DB.getDb()
-      .then(db => this.collection = db.collection('users'));
+      .then(db => this.collection = db.collection('points'));
   }
 
   async createPoint(point: PointDetail): Promise<InsertOneWriteOpResult> {

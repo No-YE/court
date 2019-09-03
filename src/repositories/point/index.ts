@@ -1,1 +1,1 @@
-export { default } from './PointRepository';
+export { default } from './MongoPoint';

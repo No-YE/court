@@ -1,8 +1,9 @@
 import { connect, Db, MongoClientOptions } from 'mongodb';
-import { mongoUri, mongoName } from '../config';
+import { mongoUri } from '../config';
 
 const options: MongoClientOptions = {
   useNewUrlParser: true,
+  useUnifiedTopology: true,
 };
 
 export class DB {
@@ -12,7 +13,7 @@ export class DB {
 
   static async getDb() {
     if (!this.db) {
-      this.db = (await connect(mongoUri, options)).db(mongoName);
+      this.db = (await connect(mongoUri, options)).db();
     }
 
     return this.db;

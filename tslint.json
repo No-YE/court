@@ -2,7 +2,8 @@
   "extends": "tslint-config-airbnb",
   "rules": {
     "import-name": [true, {
-      "user": "UserRepository"
+      "user": "UserRepository",
+      "point": "PointRepository"
     }]
   }
 }
